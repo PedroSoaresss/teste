@@ -17,7 +17,7 @@ function Quiz() {
       answer: "4",
     },
   ];
-  const initialAnswers = [null, null, null];
+  const initialAnswers = [null, null];
 
   const [optionsSelected, setOptionSelected] = useState(initialAnswers);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -44,6 +44,7 @@ function goToPrevious() {
   if (currentQuestion > 0) {
     setCurrentQuestion(currentQuestion - 1);  
   }
+
   function restartQuiz() {
     setOptionSelected(initialAnswers);
     setCurrentQuestion(0);
