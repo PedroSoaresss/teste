@@ -10,12 +10,7 @@ function App() {
     {''}
     <h1>Quiz App</h1>
     <Quiz />
-    {/* <Results 
-      questionsBank={[{ question: "Sample Question", answers: ["Answer1", "Answer2"] }]} 
-      optionsSelected={["Answer1"]} 
-      restartQuiz={() => console.log("Quiz restarted")} 
-    />
-     */}
+ 
   </div>
 }
  

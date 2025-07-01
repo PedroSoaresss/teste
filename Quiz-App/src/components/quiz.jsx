@@ -1,8 +1,5 @@
-
-
 import React, { useState } from "react";
 import Results from "./results";
-
 
 function Quiz() {
   const questionsBank = [
@@ -17,68 +14,73 @@ function Quiz() {
       answer: "4",
     },
   ];
-  const initialAnswers = [null, null];
 
-  const [optionsSelected, setOptionSelected] = useState(initialAnswers);
+  const initialAnswers = Array(questionsBank.length).fill(null);
+  const [optionsSelected, setOptionsSelected] = useState(initialAnswers);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
-  const selectedAnswer = optionsSelected[currentQuestion];
 
   function handleOptionClick(option) {
-  const newUserAnswers = [...optionsSelected];  
-  newUserAnswers[currentQuestion] = option;
-
-  setOptionSelected(newUserAnswers)
-}
-
-function goToNext() {   
- if(currentQuestion === questionsBank.length - 1) {
-  setIsQuizFinished(true);} 
-  else { 
-    setCurrentQuestion(currentQuestion + 1);
+    const newAnswers = [...optionsSelected];
+    newAnswers[currentQuestion] = option;
+    setOptionsSelected(newAnswers);
   }
 
-}
+  function goToNext() {
+    if (currentQuestion === questionsBank.length - 1) {
+      setIsQuizFinished(true);
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
+    }
+  }
 
-function goToPrevious() {
-  if (currentQuestion > 0) {
-    setCurrentQuestion(currentQuestion - 1);  
+  function goToPrevious() {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
   }
 
   function restartQuiz() {
-    setOptionSelected(initialAnswers);
+    setOptionsSelected(initialAnswers);
     setCurrentQuestion(0);
     setIsQuizFinished(false);
   }
+
   if (isQuizFinished) {
-    return <Results optionsSelected={optionsSelected} questionsBank={questionsBank} restartQuiz={restartQuiz} />;
+    return (
+      <Results
+        optionsSelected={optionsSelected}
+        questionsBank={questionsBank}
+        restartQuiz={restartQuiz}
+      />
+    );
   }
-  
-    
-}
+
+  const selectedAnswer = optionsSelected[currentQuestion];
+
   return (
     <>
       <div>
-        {""}
-        <h2> Question {currentQuestion+1}</h2>
+        <h2>Question {currentQuestion + 1}</h2>
         <p className="question">{questionsBank[currentQuestion].question}</p>
-        {questionsBank[currentQuestion].options.map((option) => (
-          <button className={"option selected" + (selectedAnswer=== option ? "selected":"")} onClick={() => handleOptionClick(option)}>
-            {" "}
+        {questionsBank[currentQuestion].options.map((option, index) => (
+          <button
+            key={index}
+            className={`option ${selectedAnswer === option ? "selected" : ""}`}
+            onClick={() => handleOptionClick(option)}
+          >
             {option}
-            
           </button>
         ))}
-        <p>Option Selected: {optionsSelected}</p>
+        <p>Option Selected: {selectedAnswer || "None"}</p>
       </div>
       <div className="nav-buttons">
-        <button onClick={goToPrevious} disabled={currentQuestion === 0}> Previous </button>
-
+        <button onClick={goToPrevious} disabled={currentQuestion === 0}>
+          Previous
+        </button>
         <button onClick={goToNext} disabled={!selectedAnswer}>
           {currentQuestion === questionsBank.length - 1 ? "Finish Quiz" : "Next"}
-         
-
-          </button>
+        </button>
       </div>
     </>
   );
