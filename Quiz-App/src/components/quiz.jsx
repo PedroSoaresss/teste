@@ -72,7 +72,6 @@ function Quiz() {
             {option}
           </button>
         ))}
-        <p>Option Selected: {selectedAnswer || "None"}</p>
       </div>
       <div className="nav-buttons">
         <button onClick={goToPrevious} disabled={currentQuestion === 0}>
