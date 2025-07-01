@@ -44,15 +44,15 @@ function goToPrevious() {
   if (currentQuestion > 0) {
     setCurrentQuestion(currentQuestion - 1);  
   }
-  // function restartQuiz() {
-  //   setOptionSelected(initialAnswers);
-  //   setCurrentQuestion(0);
-  //   setIsQuizFinished(false);
-  // }
-  if (isQuizFinished) {
-    return <Results/>;
+  function restartQuiz() {
+    setOptionSelected(initialAnswers);
+    setCurrentQuestion(0);
+    setIsQuizFinished(false);
   }
-
+  if (isQuizFinished) {
+    return <Results optionsSelected={optionsSelected} questionsBank={questionsBank} restartQuiz={restartQuiz} />;
+  }
+  
     
 }
   return (
