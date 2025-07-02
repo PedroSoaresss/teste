@@ -92,8 +92,18 @@ h2 {
   background: #1e88e5;
 }
 
-.score {
-  font-size: 1.4em;
-  text-align: center;
+img{
   margin: 20px 0;
+  display: flex;
+  align-items: center;   
+  gap: 6px;              
+  width: 75px;           
+  height: 75px;
+ 
+}
+  
+.centralizar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
